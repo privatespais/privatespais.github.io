@@ -33,6 +33,10 @@
       padding: 0;
     }
 
+    .nav-links li {
+      position: relative; /* necesario para dropdown */
+    }
+
     .nav-links a {
       text-decoration: none;
       color: white;
@@ -41,7 +45,34 @@
     }
 
     .nav-links a:hover {
-      color: #ff9800; /* cambia de color al pasar el ratón */
+      color: #ff9800;
+    }
+
+    /* Dropdown */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 150px;
+      top: 100%;
+      left: 0;
+      z-index: 1;
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #444;
+    }
+
+    .nav-links li:hover .dropdown-content {
+      display: block;
     }
   </style>
 </head>
@@ -58,7 +89,17 @@
     <ul class="nav-links">
       <li><a href="index.html">Inici</a></li>
       <li><a href="reserves.html">Reserves</a></li>
-      <li><a href="sales.html">Sales</a></li>
+
+      <!-- Dropdown Sales -->
+      <li>
+        <a href="#">Sales ▼</a>
+        <div class="dropdown-content">
+          <a href="privat.html">Privat</a>
+          <a href="can-petit.html">Can Petit</a>
+          <a href="can-roca.html">Can Roca</a>
+        </div>
+      </li>
+
       <li><a href="preus.html">Preus i Horaris</a></li>
       <li><a href="pressupost.html">Pressupost</a></li>
       <li><a href="contacte.html">Contacte</a></li>
