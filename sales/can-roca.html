@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sala Can Roca - Privat Espais</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
 
+    /* Barra navegación igual que en index */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #222;
+      padding: 10px 20px;
+    }
+    .navbar img { height: 50px; }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    .nav-links a:hover { color: #ff9800; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 150px;
+      top: 100%;
+      left: 0;
+      z-index: 1;
+      border-radius: 4px;
+    }
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+    }
+    .dropdown-content a:hover { background-color: #444; }
+    .nav-links li:hover .dropdown-content { display: block; }
+
+    /* Contenido sala */
+    .container {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .card {
+      display: flex;
+      gap: 20px;
+      background: #f9f9f9;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 45%;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .info {
+      width: 55%;
+    }
+
+    .info h2 {
+      margin-top: 0;
+      color: #444;
+    }
+
+    .info ul {
+      padding-left: 20px;
+    }
+
+    .address {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- Barra de navegación -->
+  <nav class="navbar">
+    <a href="../index.html"><img src="../Images/logo.png" alt="Privat Espais Logo"></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inici</a></li>
+      <li><a href="../reserves.html">Reserves</a></li>
+      <li>
+        <a href="#">Sales ▼</a>
+        <div class="dropdown-content">
+          <a href="privat.html">Privat</a>
+          <a href="can-petit.html">Can Petit</a>
+          <a href="can-roca.html">Can Roca</a>
+        </div>
+      </li>
+      <li><a href="../preus.html">Preus i Horaris</a></li>
+      <li><a href="../pressupost.html">Pressupost</a></li>
+      <li><a href="../contacte.html">Contacte</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contenido Sala -->
+  <div class="container">
+    <h1>Sala Can Roca</h1>
+
+    <div class="card">
+      <!-- Imagen -->
+      <img src="../images/can-roca.jpg" alt="Sala Can Roca">
+
+      <!-- Info resumida -->
+      <div class="info">
+        <h2>Característiques principals</h2>
+        <ul>
+          <li><strong>Superfície:</strong> [X m²]</li>
+          <li><strong>Aforament:</strong> [Y persones]</li>
+          <li><strong>Aparcament:</strong> Gratuït i fàcil accés</li>
+          <li><strong>Equipament:</strong> Barra, neveres, microones, cafetera Dolce Gusto</li>
+          <li><strong>Mobles:</strong> Taules i cadires per a adults i nens</li>
+          <li><strong>Oci:</strong> Parc infantil, Xbox, futbolí, dards</li>
+          <li><strong>Multimèdia:</strong> Equip de música, TV amb HDMI i reproductor DVD</li>
+          <li><strong>Climatització:</strong> Aire condicionat fred/calor</li>
+          <li><strong>Zona de relax:</strong> Sofà i espai de tertúlia</li>
+        </ul>
+        <p><em>Ideal per a esdeveniments familiars i festes amb grans i petits!</em></p>
+
+        <div class="address">
+          📍 C/ Camí Font de les Canyes, 48A. Pol. Industrial Can Petit, Terrassa (Barcelona)
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
