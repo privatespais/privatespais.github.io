@@ -72,14 +72,14 @@
     .sala-info p { margin:0; color:#555; font-size:0.95rem; }
     .sala:last-child { grid-column: 1 / 2; }
 
-    /* Menú móvil */
+    /* Menú móvil - hamburger animado */
     .hamburger {
       display: none;
       cursor: pointer;
       width: 30px;
       height: 22px;
       position: relative;
-      z-index: 210;
+      z-index: 300; /* Más alto que el menú */
       flex-shrink: 0;
     }
     .hamburger span {
@@ -105,7 +105,7 @@
       top: 0; left:0;
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.8);
-      z-index: 200;
+      z-index: 200; /* Debajo del hamburger */
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -117,11 +117,9 @@
       text-decoration: none;
     }
 
-    /* Desplegable Sales móvil */
     .mobile-sales { display: none; flex-direction: column; margin-top: 10px; }
     .mobile-sales a { font-size: 1.3rem; margin: 8px 0; padding-left: 10px; }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
@@ -204,7 +202,8 @@
     const mobileSales = document.getElementById('mobileSales');
 
     function toggleMenu() {
-      if (mobileMenu.style.display === 'flex') {
+      const isOpen = hamburger.classList.contains('open');
+      if (isOpen) {
         mobileMenu.style.display = 'none';
         hamburger.classList.remove('open');
       } else {
