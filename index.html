@@ -50,6 +50,7 @@
     .nav-links a:hover {
       color: #ff9800;
     }
+
     .dropdown-content {
       display: none;
       position: absolute;
@@ -120,7 +121,12 @@
       font-size: 2rem;
       cursor: pointer;
       color: #333;
+      transition: transform 0.3s ease;
     }
+    .hamburger.open {
+      transform: rotate(90deg);
+    }
+
     .mobile-menu {
       display: none;
       position: fixed;
@@ -133,6 +139,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      transition: opacity 0.3s ease;
     }
     .mobile-menu a {
       color: white;
@@ -149,10 +156,24 @@
       color: white;
     }
 
+    /* Desplegable de Sales en móvil */
+    .mobile-sales {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+    }
+    .mobile-sales a {
+      font-size: 1.3rem;
+      margin: 8px 0;
+      padding-left: 10px;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .nav-links { display: none; } /* Ocultar menú de escritorio */
       .hamburger { display: block; } /* Mostrar botón hamburger */
+
+      /* Salas apiladas */
       .salas {
         display: flex;
         flex-direction: column;
@@ -167,23 +188,8 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <span class="hamburger" onclick="openMenu()">☰</span>
+    <span class="hamburger" id="hamburger" onclick="toggleMenu()">☰</span>
     <a href="index.html"><img src="images/logo.png" alt="Privat Espais Logo"></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Inici</a></li>
-      <li><a href="reserves.html">Reserves</a></li>
-      <li>
-        <a href="#">Sales ▼</a>
-        <div class="dropdown-content">
-          <a href="sales/privat.html">Privat</a>
-          <a href="sales/can-petit.html">Can Petit</a>
-          <a href="sales/can-roca.html">Can Roca</a>
-        </div>
-      </li>
-      <li><a href="preus.html">Preus i Horaris</a></li>
-      <li><a href="pressupost.html">Pressupost</a></li>
-      <li><a href="contacte.html">Contacte</a></li>
-    </ul>
   </nav>
 
   <!-- Menú móvil -->
@@ -191,9 +197,12 @@
     <span class="close" onclick="closeMenu()">✖</span>
     <a href="index.html">Inici</a>
     <a href="reserves.html">Reserves</a>
-    <a href="sales/privat.html">Privat</a>
-    <a href="sales/can-petit.html">Can Petit</a>
-    <a href="sales/can-roca.html">Can Roca</a>
+    <a href="#" onclick="toggleSales(event)">Sales ▼</a>
+    <div class="mobile-sales" id="mobileSales">
+      <a href="sales/privat.html">Privat</a>
+      <a href="sales/can-petit.html">Can Petit</a>
+      <a href="sales/can-roca.html">Can Roca</a>
+    </div>
     <a href="preus.html">Preus i Horaris</a>
     <a href="pressupost.html">Pressupost</a>
     <a href="contacte.html">Contacte</a>
@@ -204,36 +213,52 @@
     <div class="sala">
       <a href="sales/privat.html"><img src="images/privat.jpg" alt="Sala Privat"></a>
       <div class="sala-info">
-        <h3>Privat</h3>
-        <p>La sala més gran: 290 m², capacitat per a 120 persones.</p>
+        <h3>🎉 Sala Privat</h3>
+        <p>La més gran, amb 290m² i capacitat per a 120 persones. 👨‍👩‍👧‍👦</p>
       </div>
     </div>
     <div class="sala">
       <a href="sales/can-petit.html"><img src="images/can-petit.jpg" alt="Sala Can Petit"></a>
       <div class="sala-info">
-        <h3>Can Petit</h3>
-        <p>Espai de 190 m² amb parc infantil per a 30 nens i nenes 🎈.</p>
+        <h3>👨‍👩‍👧‍👦 Sala Can Petit</h3>
+        <p>Espaiosa, 190m², amb parc infantil i aforament per a 80 persones.</p>
       </div>
     </div>
     <div class="sala">
       <a href="sales/can-roca.html"><img src="images/can-roca.jpg" alt="Sala Can Roca"></a>
       <div class="sala-info">
-        <h3>Can Roca</h3>
-        <p>Una sala moderna i funcional per reunions i celebracions.</p>
+        <h3>🥳 Sala Can Roca</h3>
+        <p>Confortable i moderna, pensada per a festes variades.</p>
       </div>
     </div>
   </section>
 
   <!-- Scripts -->
   <script>
-    function openMenu() {
-      document.getElementById('mobileMenu').style.display = 'flex';
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburger');
+    const mobileSales = document.getElementById('mobileSales');
+
+    function toggleMenu() {
+      if (mobileMenu.style.display === 'flex') {
+        mobileMenu.style.display = 'none';
+        hamburger.classList.remove('open');
+      } else {
+        mobileMenu.style.display = 'flex';
+        hamburger.classList.add('open');
+      }
     }
+
     function closeMenu() {
-      document.getElementById('mobileMenu').style.display = 'none';
+      mobileMenu.style.display = 'none';
+      hamburger.classList.remove('open');
+    }
+
+    function toggleSales(event) {
+      event.preventDefault();
+      mobileSales.style.display = mobileSales.style.display === 'flex' ? 'none' : 'flex';
     }
   </script>
 
 </body>
 </html>
-
