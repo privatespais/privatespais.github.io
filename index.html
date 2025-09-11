@@ -30,7 +30,7 @@
       height: 70px;
     }
 
-    /* Menú de escritorio */
+    /* Menu de escritorio */
     .nav-links {
       list-style: none;
       display: flex;
@@ -75,7 +75,7 @@
       display: block;
     }
 
-    /* Salas escritorio */
+    /* Salas en escritorio */
     .salas {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -147,8 +147,16 @@
       margin: 15px 0;
       text-decoration: none;
     }
+    .mobile-menu .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: white;
+    }
 
-    /* Desplegable Sales en móvil */
+    /* Desplegable de Sales en móvil */
     .mobile-sales {
       display: none;
       flex-direction: column;
@@ -162,9 +170,10 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .nav-links { display: none; } /* Ocultar menú escritorio */
-      .hamburger { display: block; }
+      .nav-links { display: none; } /* Ocultar menú de escritorio */
+      .hamburger { display: block; } /* Mostrar botón hamburger */
 
+      /* Salas apiladas */
       .salas {
         display: flex;
         flex-direction: column;
@@ -181,25 +190,11 @@
   <nav class="navbar">
     <span class="hamburger" id="hamburger" onclick="toggleMenu()">☰</span>
     <a href="index.html"><img src="images/logo.png" alt="Privat Espais Logo"></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Inici</a></li>
-      <li><a href="reserves.html">Reserves</a></li>
-      <li>
-        <a href="#">Sales ▼</a>
-        <div class="dropdown-content">
-          <a href="sales/privat.html">Privat</a>
-          <a href="sales/can-petit.html">Can Petit</a>
-          <a href="sales/can-roca.html">Can Roca</a>
-        </div>
-      </li>
-      <li><a href="preus.html">Preus i Horaris</a></li>
-      <li><a href="pressupost.html">Pressupost</a></li>
-      <li><a href="contacte.html">Contacte</a></li>
-    </ul>
   </nav>
 
   <!-- Menú móvil -->
   <div class="mobile-menu" id="mobileMenu">
+    <span class="close" onclick="closeMenu()">✖</span>
     <a href="index.html">Inici</a>
     <a href="reserves.html">Reserves</a>
     <a href="#" onclick="toggleSales(event)">Sales ▼</a>
@@ -252,6 +247,11 @@
         mobileMenu.style.display = 'flex';
         hamburger.classList.add('open');
       }
+    }
+
+    function closeMenu() {
+      mobileMenu.style.display = 'none';
+      hamburger.classList.remove('open');
     }
 
     function toggleSales(event) {
