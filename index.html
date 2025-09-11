@@ -14,7 +14,7 @@
       color: #333;
     }
 
-    /* Navbar moderna */
+    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -29,6 +29,8 @@
     .navbar img {
       height: 70px;
     }
+
+    /* Menu de escritorio */
     .nav-links {
       list-style: none;
       display: flex;
@@ -48,8 +50,6 @@
     .nav-links a:hover {
       color: #ff9800;
     }
-
-    /* Dropdown */
     .dropdown-content {
       display: none;
       position: absolute;
@@ -74,7 +74,7 @@
       display: block;
     }
 
-    /* Sección de salas con diseño 2 arriba + 1 abajo */
+    /* Salas en escritorio */
     .salas {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -110,10 +110,56 @@
       color: #555;
       font-size: 0.95rem;
     }
-
-    /* Para que la tercera sala salga abajo a la izquierda */
     .sala:last-child {
       grid-column: 1 / 2;
+    }
+
+    /* Menú móvil */
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #333;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 200;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .mobile-menu a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 15px 0;
+      text-decoration: none;
+    }
+    .mobile-menu .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; } /* Ocultar menú de escritorio */
+      .hamburger { display: block; } /* Mostrar botón hamburger */
+      .salas {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+      }
+      .sala img { height: 200px; }
     }
   </style>
 </head>
@@ -121,6 +167,7 @@
 
   <!-- Navbar -->
   <nav class="navbar">
+    <span class="hamburger" onclick="openMenu()">☰</span>
     <a href="index.html"><img src="images/logo.png" alt="Privat Espais Logo"></a>
     <ul class="nav-links">
       <li><a href="index.html">Inici</a></li>
@@ -139,30 +186,54 @@
     </ul>
   </nav>
 
+  <!-- Menú móvil -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="close" onclick="closeMenu()">✖</span>
+    <a href="index.html">Inici</a>
+    <a href="reserves.html">Reserves</a>
+    <a href="sales/privat.html">Privat</a>
+    <a href="sales/can-petit.html">Can Petit</a>
+    <a href="sales/can-roca.html">Can Roca</a>
+    <a href="preus.html">Preus i Horaris</a>
+    <a href="pressupost.html">Pressupost</a>
+    <a href="contacte.html">Contacte</a>
+  </div>
+
   <!-- Salas -->
   <section class="salas">
     <div class="sala">
       <a href="sales/privat.html"><img src="images/privat.jpg" alt="Sala Privat"></a>
       <div class="sala-info">
-        <h3>🎉 Sala Privat</h3>
-        <p>La més gran, amb 290m² i capacitat per a 120 persones.</p>
+        <h3>Privat</h3>
+        <p>La sala més gran: 290 m², capacitat per a 120 persones.</p>
       </div>
     </div>
     <div class="sala">
       <a href="sales/can-petit.html"><img src="images/can-petit.jpg" alt="Sala Can Petit"></a>
       <div class="sala-info">
-        <h3>👨‍👩‍👧‍👦 Sala Can Petit</h3>
-        <p>Espaiosa, 190m², amb parc infantil i aforament per a 80 persones.</p>
+        <h3>Can Petit</h3>
+        <p>Espai de 190 m² amb parc infantil per a 30 nens i nenes 🎈.</p>
       </div>
     </div>
     <div class="sala">
       <a href="sales/can-roca.html"><img src="images/can-roca.jpg" alt="Sala Can Roca"></a>
       <div class="sala-info">
-        <h3>🥳 Sala Can Roca</h3>
-        <p>Confortable i moderna, pensada per a festes variades.</p>
+        <h3>Can Roca</h3>
+        <p>Una sala moderna i funcional per reunions i celebracions.</p>
       </div>
     </div>
   </section>
 
+  <!-- Scripts -->
+  <script>
+    function openMenu() {
+      document.getElementById('mobileMenu').style.display = 'flex';
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').style.display = 'none';
+    }
+  </script>
+
 </body>
 </html>
+
