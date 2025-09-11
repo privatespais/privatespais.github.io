@@ -155,11 +155,25 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <h1>Benvingut a Privat Espais 🎉</h1>
-    <p>Lloga la sala perfecta per a les teves celebracions a Terrassa</p>
-  </section>
+.hero {
+  text-align: center;
+  padding: 25px 20px; /* antes 50px */
+}
+.hero h1 {
+  font-size: 2.2rem; /* un poco más compacto */
+  margin-bottom: 8px;
+}
+.hero p {
+  font-size: 1.1rem;
+  color: #666;
+}
 
+.salas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 20px; /* antes 40px */
+}
   <!-- Salas -->
   <section class="salas">
     <div class="sala">
