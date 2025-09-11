@@ -78,8 +78,10 @@
       cursor: pointer;
       width: 30px;
       height: 22px;
-      position: relative;
-      z-index: 300; /* Más alto que el menú */
+      position: fixed; /* fijo para estar encima */
+      top: 20px;
+      left: 20px;
+      z-index: 500; /* más alto que mobile-menu */
       flex-shrink: 0;
     }
     .hamburger span {
@@ -105,7 +107,7 @@
       top: 0; left:0;
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.8);
-      z-index: 200; /* Debajo del hamburger */
+      z-index: 400; /* menor que hamburger */
       flex-direction: column;
       justify-content: center;
       align-items: center;
