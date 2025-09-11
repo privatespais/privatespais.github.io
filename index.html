@@ -89,10 +89,10 @@
       color: #666;
     }
 
-    /* Sección de salas */
+    /* Sección de salas con diseño 2 arriba + 1 abajo */
     .salas {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 30px;
       padding: 40px;
     }
@@ -109,7 +109,7 @@
     }
     .sala img {
       width: 100%;
-      height: 220px;
+      height: 300px;
       object-fit: cover;
     }
     .sala-info {
@@ -124,6 +124,11 @@
       margin: 0;
       color: #555;
       font-size: 0.95rem;
+    }
+
+    /* Para que la tercera sala salga abajo a la izquierda */
+    .sala:last-child {
+      grid-column: 1 / 2;
     }
   </style>
 </head>
@@ -160,22 +165,22 @@
     <div class="sala">
       <a href="sales/privat.html"><img src="images/privat.jpg" alt="Sala Privat"></a>
       <div class="sala-info">
-        <h3>Privat</h3>
-        <p>Sala polivalent i acollidora per festes privades i esdeveniments íntims.</p>
+        <h3>🎉 Sala Privat</h3>
+        <p>La més gran, amb 290m² i capacitat per a 120 persones.</p>
       </div>
     </div>
     <div class="sala">
       <a href="sales/can-petit.html"><img src="images/can-petit.jpg" alt="Sala Can Petit"></a>
       <div class="sala-info">
-        <h3>Can Petit</h3>
-        <p>Espai ampli amb parc infantil, pensat per grans i petits 🎈.</p>
+        <h3>👨‍👩‍👧‍👦 Sala Can Petit</h3>
+        <p>Espaiosa, 190m², amb parc infantil i aforament per a 80 persones..</p>
       </div>
     </div>
     <div class="sala">
       <a href="sales/can-roca.html"><img src="images/can-roca.jpg" alt="Sala Can Roca"></a>
       <div class="sala-info">
-        <h3>Can Roca</h3>
-        <p>Una sala moderna i funcional per reunions i celebracions d’amics.</p>
+        <h3>🥳 Sala Can Roca</h3>
+        <p>Confortable i moderna, pensada per a festes variades.</p>
       </div>
     </div>
   </section>
