@@ -74,7 +74,7 @@
 
   /* Menú móvil */
   .hamburger, .close-menu {
-    display: none;
+    display: none; /* por defecto */
     cursor: pointer;
     width: 30px;
     height: 22px;
@@ -93,7 +93,10 @@
     border-radius: 2px;
     transition: 0.3s;
   }
-  .close-menu { display: flex; }
+  .close-menu {
+    display: none; /* aparecerá solo cuando se abra el menú */
+    position: fixed;
+  }
   .close-menu span:nth-child(1) { transform: rotate(45deg); position: absolute; top: 9px; }
   .close-menu span:nth-child(2) { transform: rotate(-45deg); position: absolute; top: 9px; }
 
@@ -116,8 +119,8 @@
     position: fixed;
     top:0; left:0;
     width:100%; height:100%;
-    z-index: 1501; /* debajo del close-menu */
-    pointer-events: none; /* se activa con open */
+    z-index: 1501;
+    pointer-events: none;
   }
   .mobile-menu.open { pointer-events: auto; }
 
@@ -130,7 +133,6 @@
     transform: translateY(-20px);
     transition: transform 0.4s ease, opacity 0.4s ease;
   }
-
   .mobile-menu.open a {
     opacity: 1;
     transform: translateY(0);
@@ -139,12 +141,11 @@
   .mobile-sales { display: none; flex-direction: column; margin-top: 10px; }
   .mobile-sales a { font-size: 1.3rem; margin: 8px 0; padding-left: 10px; }
 
+  /* Móvil */
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    .close-menu { display: none; }
-
-    /* Mover logo a la derecha */
+    .close-menu { display: flex; }
     .navbar a { order: 2; margin-left: auto; }
 
     .salas { display: flex; flex-direction: column; gap: 20px; padding: 20px; }
