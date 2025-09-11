@@ -81,8 +81,21 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      z-index: 500;
+      z-index: 600; /* más alto que el fondo y la X */
+      flex-direction: column;
+      justify-content: space-between;
     }
+    .hamburger span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: #333;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translateY(9px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translateY(-9px); }
 
     .mobile-menu-bg {
       display: none;
@@ -92,7 +105,7 @@
       background: rgba(0,0,0,0.8);
       opacity: 0;
       transition: opacity 0.4s ease;
-      z-index: 400;
+      z-index: 500;
     }
 
     .mobile-menu {
@@ -103,7 +116,7 @@
       position: fixed;
       top:0; left:0;
       width:100%; height:100%;
-      z-index: 450;
+      z-index: 550;
       pointer-events: none; /* se activa con open */
     }
     .mobile-menu.open { pointer-events: auto; }
@@ -126,20 +139,12 @@
     .mobile-sales { display: none; flex-direction: column; margin-top: 10px; }
     .mobile-sales a { font-size: 1.3rem; margin: 8px 0; padding-left: 10px; }
 
-    .close-menu {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-      z-index: 500;
-      display: none;
-    }
-
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .hamburger { display: block; }
+      .hamburger { display: flex; }
+
+      /* Mover logo a la derecha */
+      .navbar a { order: 2; margin-left: auto; }
 
       .salas { display: flex; flex-direction: column; gap: 20px; padding: 20px; }
       .sala img { height: 200px; }
@@ -150,7 +155,7 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="hamburger" id="hamburger" onclick="openMenu()">
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
@@ -176,7 +181,6 @@
   <!-- Menú móvil -->
   <div class="mobile-menu-bg" id="mobileMenuBg"></div>
   <div class="mobile-menu" id="mobileMenu">
-    <span class="close-menu" id="closeMenu" onclick="closeMenu()">✖</span>
     <a href="index.html" style="transition-delay:0.1s">Inici</a>
     <a href="reserves.html" style="transition-delay:0.2s">Reserves</a>
     <a href="#" onclick="toggleSales(event)" style="transition-delay:0.3s">Sales ▼</a>
@@ -219,19 +223,19 @@
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileMenuBg = document.getElementById('mobileMenuBg');
     const hamburger = document.getElementById('hamburger');
-    const closeMenuBtn = document.getElementById('closeMenu');
     const mobileSales = document.getElementById('mobileSales');
 
-    function openMenu() {
-      mobileMenu.classList.add('open');
-      mobileMenuBg.style.display = 'block';
-      setTimeout(() => { mobileMenuBg.style.opacity = '1'; }, 10);
-    }
-
-    function closeMenu() {
-      mobileMenu.classList.remove('open');
-      mobileMenuBg.style.opacity = '0';
-      setTimeout(() => { mobileMenuBg.style.display = 'none'; }, 400);
+    function toggleMenu() {
+      const isOpen = hamburger.classList.contains('open');
+      if (isOpen) {
+        hamburger.classList.remove('open');
+        mobileMenuBg.style.opacity = '0';
+        setTimeout(() => { mobileMenuBg.style.display = 'none'; mobileMenu.classList.remove('open'); }, 400);
+      } else {
+        hamburger.classList.add('open');
+        mobileMenuBg.style.display = 'block';
+        setTimeout(() => { mobileMenuBg.style.opacity = '1'; mobileMenu.classList.add('open'); }, 10);
+      }
     }
 
     function toggleSales(event) {
