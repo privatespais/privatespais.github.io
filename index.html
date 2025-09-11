@@ -72,55 +72,70 @@
     .sala-info p { margin:0; color:#555; font-size:0.95rem; }
     .sala:last-child { grid-column: 1 / 2; }
 
-    /* Menú móvil - hamburger animado */
+    /* Menú móvil */
     .hamburger {
       display: none;
       cursor: pointer;
       width: 30px;
       height: 22px;
-      position: fixed; /* fijo para estar encima */
+      position: fixed;
       top: 20px;
       left: 20px;
-      z-index: 500; /* más alto que mobile-menu */
-      flex-shrink: 0;
+      z-index: 500;
     }
-    .hamburger span {
-      position: absolute;
-      height: 4px;
-      width: 100%;
-      background: #333;
-      border-radius: 2px;
-      left: 0;
-      transition: 0.3s;
-    }
-    .hamburger span:nth-child(1) { top: 0; }
-    .hamburger span:nth-child(2) { top: 9px; }
-    .hamburger span:nth-child(3) { top: 18px; }
 
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg); top: 9px; }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg); top: 9px; }
-
-    .mobile-menu {
+    .mobile-menu-bg {
       display: none;
       position: fixed;
-      top: 0; left:0;
-      width: 100%; height: 100%;
+      top:0; left:0;
+      width:100%; height:100%;
       background: rgba(0,0,0,0.8);
-      z-index: 400; /* menor que hamburger */
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 400;
+    }
+
+    .mobile-menu {
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      z-index: 450;
+      pointer-events: none; /* se activa con open */
     }
+    .mobile-menu.open { pointer-events: auto; }
+
     .mobile-menu a {
       color: white;
       font-size: 1.5rem;
       margin: 15px 0;
       text-decoration: none;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .mobile-menu.open a {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .mobile-sales { display: none; flex-direction: column; margin-top: 10px; }
     .mobile-sales a { font-size: 1.3rem; margin: 8px 0; padding-left: 10px; }
+
+    .close-menu {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 500;
+      display: none;
+    }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -135,7 +150,7 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <div class="hamburger" id="hamburger" onclick="openMenu()">
       <span></span>
       <span></span>
       <span></span>
@@ -159,18 +174,20 @@
   </nav>
 
   <!-- Menú móvil -->
+  <div class="mobile-menu-bg" id="mobileMenuBg"></div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Inici</a>
-    <a href="reserves.html">Reserves</a>
-    <a href="#" onclick="toggleSales(event)">Sales ▼</a>
+    <span class="close-menu" id="closeMenu" onclick="closeMenu()">✖</span>
+    <a href="index.html" style="transition-delay:0.1s">Inici</a>
+    <a href="reserves.html" style="transition-delay:0.2s">Reserves</a>
+    <a href="#" onclick="toggleSales(event)" style="transition-delay:0.3s">Sales ▼</a>
     <div class="mobile-sales" id="mobileSales">
-      <a href="sales/privat.html">Privat</a>
-      <a href="sales/can-petit.html">Can Petit</a>
-      <a href="sales/can-roca.html">Can Roca</a>
+      <a href="sales/privat.html" style="transition-delay:0.35s">Privat</a>
+      <a href="sales/can-petit.html" style="transition-delay:0.4s">Can Petit</a>
+      <a href="sales/can-roca.html" style="transition-delay:0.45s">Can Roca</a>
     </div>
-    <a href="preus.html">Preus i Horaris</a>
-    <a href="pressupost.html">Pressupost</a>
-    <a href="contacte.html">Contacte</a>
+    <a href="preus.html" style="transition-delay:0.5s">Preus i Horaris</a>
+    <a href="pressupost.html" style="transition-delay:0.6s">Pressupost</a>
+    <a href="contacte.html" style="transition-delay:0.7s">Contacte</a>
   </div>
 
   <!-- Salas -->
@@ -200,18 +217,21 @@
 
   <script>
     const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuBg = document.getElementById('mobileMenuBg');
     const hamburger = document.getElementById('hamburger');
+    const closeMenuBtn = document.getElementById('closeMenu');
     const mobileSales = document.getElementById('mobileSales');
 
-    function toggleMenu() {
-      const isOpen = hamburger.classList.contains('open');
-      if (isOpen) {
-        mobileMenu.style.display = 'none';
-        hamburger.classList.remove('open');
-      } else {
-        mobileMenu.style.display = 'flex';
-        hamburger.classList.add('open');
-      }
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      mobileMenuBg.style.display = 'block';
+      setTimeout(() => { mobileMenuBg.style.opacity = '1'; }, 10);
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      mobileMenuBg.style.opacity = '0';
+      setTimeout(() => { mobileMenuBg.style.display = 'none'; }, 400);
     }
 
     function toggleSales(event) {
