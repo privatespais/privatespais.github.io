@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privat Espais - Inici</title>
+  <title>Privat Espais</title>
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: #fafafa;
       color: #333;
     }
@@ -34,6 +36,9 @@
       margin: 0;
       padding: 0;
     }
+    .nav-links li {
+      position: relative;
+    }
     .nav-links a {
       text-decoration: none;
       color: #555;
@@ -43,6 +48,8 @@
     .nav-links a:hover {
       color: #ff9800;
     }
+
+    /* Dropdown */
     .dropdown-content {
       display: none;
       position: absolute;
@@ -67,62 +74,62 @@
       display: block;
     }
 
-    /* Sección Salas */
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      color: #222;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #666;
+    }
+
+    /* Sección de salas */
     .salas {
-      max-width: 1200px;
-      margin: 50px auto;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 30px;
-      padding: 0 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 40px;
     }
     .sala {
-      position: relative;
-      overflow: hidden;
-      border-radius: 16px;
-      cursor: pointer;
       background: white;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .sala:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
     .sala img {
       width: 100%;
-      height: 300px;
+      height: 220px;
       object-fit: cover;
-      display: block;
-      transition: all 0.4s ease;
-    }
-    .sala:hover img {
-      filter: brightness(0.9);
     }
     .sala-info {
       padding: 20px;
     }
-    .sala-info h2 {
+    .sala-info h3 {
       margin: 0 0 10px;
-      font-size: 22px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      color: #ff9800;
+      font-size: 1.4rem;
     }
     .sala-info p {
       margin: 0;
-      font-size: 14px;
       color: #555;
-    }
-
-    /* Para que la 3ª sala quede sola abajo */
-    .salas div:last-child {
-      grid-column: span 2;
-      max-width: 48%;
+      font-size: 0.95rem;
     }
   </style>
 </head>
 <body>
-  <!-- Barra de navegación -->
+
+  <!-- Navbar -->
   <nav class="navbar">
     <a href="index.html"><img src="images/logo.png" alt="Privat Espais Logo"></a>
     <ul class="nav-links">
@@ -142,34 +149,36 @@
     </ul>
   </nav>
 
-  <!-- Sección principal con salas -->
-  <section class="salas">
-    <!-- Sala Privat -->
-    <a href="sales/privat.html" class="sala">
-      <img src="images/privat.jpg" alt="Sala Privat">
-      <div class="sala-info">
-        <h2>🎉 Sala Privat</h2>
-        <p>La més gran, amb 290m² i capacitat per a 120 persones.</p>
-      </div>
-    </a>
-
-    <!-- Sala Can Petit -->
-    <a href="sales/can-petit.html" class="sala">
-      <img src="images/can-petit.jpg" alt="Sala Can Petit">
-      <div class="sala-info">
-        <h2>👨‍👩‍👧‍👦 Sala Can Petit</h2>
-        <p>Espaiosa, 190m², amb parc infantil i aforament per a 80 persones.</p>
-      </div>
-    </a>
-
-    <!-- Sala Can Roca -->
-    <a href="sales/can-roca.html" class="sala">
-      <img src="images/can-roca.jpg" alt="Sala Can Roca">
-      <div class="sala-info">
-        <h2>🥳 Sala Can Roca</h2>
-        <p>Confortable i moderna, pensada per a festes variades.</p>
-      </div>
-    </a>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Benvingut a Privat Espais 🎉</h1>
+    <p>Lloga la sala perfecta per a les teves celebracions a Terrassa</p>
   </section>
+
+  <!-- Salas -->
+  <section class="salas">
+    <div class="sala">
+      <a href="sales/privat.html"><img src="images/privat.jpg" alt="Sala Privat"></a>
+      <div class="sala-info">
+        <h3>Privat</h3>
+        <p>Sala polivalent i acollidora per festes privades i esdeveniments íntims.</p>
+      </div>
+    </div>
+    <div class="sala">
+      <a href="sales/can-petit.html"><img src="images/can-petit.jpg" alt="Sala Can Petit"></a>
+      <div class="sala-info">
+        <h3>Can Petit</h3>
+        <p>Espai ampli amb parc infantil, pensat per grans i petits 🎈.</p>
+      </div>
+    </div>
+    <div class="sala">
+      <a href="sales/can-roca.html"><img src="images/can-roca.jpg" alt="Sala Can Roca"></a>
+      <div class="sala-info">
+        <h3>Can Roca</h3>
+        <p>Una sala moderna i funcional per reunions i celebracions d’amics.</p>
+      </div>
+    </div>
+  </section>
+
 </body>
 </html>
