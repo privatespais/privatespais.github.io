@@ -109,11 +109,8 @@ body {
   color: #555;
   font-size: 0.95rem;
 }
-.sala:last-child {
-  grid-column: 1 / 2;
-}
 
-/* Botón hamburguesa */
+/* Menú móvil */
 .menu-toggle {
   position: fixed;
   top: 15px;
@@ -129,7 +126,7 @@ body {
 .menu-toggle .bar {
   width: 100%;
   height: 4px;
-  background: black; /* visible en móvil */
+  background: black;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -145,7 +142,7 @@ body {
   background: orange;
 }
 
-/* Menú móvil */
+/* Menú negro completo */
 .menu {
   position: fixed;
   top: 0;
@@ -189,14 +186,6 @@ body {
 .menu.show ul li:nth-child(5){ transition-delay: 0.5s; }
 .menu.show ul li:nth-child(6){ transition-delay: 0.6s; }
 
-.menu ul li a, .menu ul li span {
-  color: white;
-  font-size: 24px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 /* Dropdown móvil */
 .mobile-sales {
   display: none;
@@ -212,14 +201,27 @@ body {
   display: flex;
 }
 
+/* Botón cerrar X encima del menú */
+.close-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 32px;
+  color: orange;
+  cursor: pointer;
+  z-index: 1002; /* encima del menú */
+}
+
 /* Responsive */
 @media (max-width: 768px){
   .nav-links{display:none;}
   .menu-toggle{display:flex;}
-  .navbar img{margin:0 auto;} /* centrado móvil */
+  .navbar img{margin:0 auto;}
+  .salas{display:flex;flex-direction:column;gap:20px;padding:20px;}
+  .sala img{height:200px;}
 }
 @media (min-width: 769px){
-  .navbar img{margin-left:0;} /* izquierda ordenador */
+  .navbar img{margin-left:0;}
 }
 </style>
 </head>
@@ -252,6 +254,7 @@ body {
 
 <!-- Menú móvil -->
 <div class="menu" id="mobileMenu">
+  <span class="close-btn" id="closeBtn">&times;</span>
   <ul>
     <li><a href="index.html">Inici</a></li>
     <li><a href="reserves.html">Reserves</a></li>
@@ -297,6 +300,7 @@ body {
 <script>
 const menuToggle = document.getElementById("menuToggle");
 const mobileMenu = document.getElementById("mobileMenu");
+const closeBtn = document.getElementById("closeBtn");
 const mobileSales = document.getElementById("mobileSales");
 const mobileSalesDropdown = document.getElementById("mobileSalesDropdown");
 
@@ -306,7 +310,13 @@ menuToggle.addEventListener("click", () => {
   mobileMenu.classList.toggle("show");
 });
 
-// Abrir/cerrar desplegable Sales en móvil
+// Cerrar menú con X
+closeBtn.addEventListener("click", () => {
+  menuToggle.classList.remove("open");
+  mobileMenu.classList.remove("show");
+});
+
+// Toggle dropdown Salas en móvil
 mobileSales.addEventListener("click", () => {
   mobileSalesDropdown.classList.toggle("show");
 });
