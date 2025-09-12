@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privat Espais</title>
-  <!-- Fuente moderna -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -15,10 +14,10 @@
       color: #333;
     }
 
-    /* Navbar */
+    /* Navbar escritorio */
     .navbar {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       background: white;
       border-bottom: 1px solid #ddd;
@@ -29,9 +28,8 @@
     }
     .navbar img {
       height: 70px;
+      margin-left: auto; /* empuja el logo a la derecha */
     }
-
-    /* Menú de escritorio */
     .nav-links {
       list-style: none;
       display: flex;
@@ -39,18 +37,13 @@
       margin: 0;
       padding: 0;
     }
-    .nav-links li {
-      position: relative;
-    }
     .nav-links a {
       text-decoration: none;
       color: #555;
       font-weight: 600;
       transition: color 0.3s ease;
     }
-    .nav-links a:hover {
-      color: #ff9800;
-    }
+    .nav-links a:hover { color: #ff9800; }
 
     .dropdown-content {
       display: none;
@@ -69,11 +62,100 @@
       color: #555;
       text-decoration: none;
     }
-    .dropdown-content a:hover {
-      background: #eee;
+    .dropdown-content a:hover { background: #eee; }
+    .nav-links li:hover .dropdown-content { display: block; }
+
+    /* Botón hamburguesa (solo en móvil) */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 2001; /* encima del menú */
     }
-    .nav-links li:hover .dropdown-content {
-      display: block;
+    .menu-toggle .bar {
+      width: 100%;
+      height: 4px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .menu-toggle.open .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+      background: #ff9800;
+    }
+    .menu-toggle.open .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.open .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+      background: #ff9800;
+    }
+
+    /* Menú lateral móvil */
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;        /* ocupa toda la pantalla */
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9); /* negro con transparencia */
+      display: none;
+      flex-direction: column;
+      padding: 100px 20px;
+      z-index: 2000;
+      opacity: 0;
+      transform: translateY(-100%);
+      transition: all 0.5s ease;
+    }
+    .menu.visible {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Enlaces del menú móvil */
+    .menu a {
+      color: white;
+      font-size: 1.5rem;
+      text-decoration: none;
+      margin: 15px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+    .menu.visible a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .menu.visible a:nth-child(1) { transition-delay: 0.1s; }
+    .menu.visible a:nth-child(2) { transition-delay: 0.2s; }
+    .menu.visible a:nth-child(3) { transition-delay: 0.3s; }
+    .menu.visible a:nth-child(4) { transition-delay: 0.4s; }
+    .menu.visible a:nth-child(5) { transition-delay: 0.5s; }
+    .menu.visible a:nth-child(6) { transition-delay: 0.6s; }
+
+    /* Submenú en móvil */
+    .mobile-dropdown {
+      display: none;
+      flex-direction: column;
+      margin-left: 10px;
+    }
+    .mobile-dropdown a {
+      font-size: 1.2rem;
+      margin: 8px 0;
+    }
+    .menu .toggle-sales {
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: flex; }
     }
 
     /* Salas escritorio */
@@ -90,113 +172,16 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .sala:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-    .sala img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-    }
-    .sala-info {
-      padding: 20px;
-    }
-    .sala-info h3 {
-      margin: 0 0 10px;
-      color: #ff9800;
-      font-size: 1.4rem;
-    }
-    .sala-info p {
-      margin: 0;
-      color: #555;
-      font-size: 0.95rem;
-    }
-    .sala:last-child {
-      grid-column: 1 / 2;
-    }
+    .sala:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .sala img { width: 100%; height: 300px; object-fit: cover; }
+    .sala-info { padding: 20px; }
+    .sala-info h3 { margin: 0 0 10px; color: #ff9800; font-size: 1.4rem; }
+    .sala-info p { margin: 0; color: #555; font-size: 0.95rem; }
+    .sala:last-child { grid-column: 1 / 2; }
 
-    /* Botón hamburguesa */
-    .menu-toggle {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      width: 30px;
-      height: 25px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 1001;
-    }
-    .menu-toggle .bar {
-      width: 100%;
-      height: 4px;
-      background: black;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .menu-toggle.open .bar:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .menu-toggle.open .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-toggle.open .bar:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    /* Menú lateral */
-    .menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 70%;
-      max-width: 280px;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      display: none;
-      flex-direction: column;
-      padding: 80px 20px;
-      z-index: 1000;
-      opacity: 0;
-      transform: translateX(-100%);
-      transition: all 0.3s ease;
-    }
-    .menu.visible {
-      display: flex;
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .menu a {
-      color: white;
-      font-size: 1.2rem;
-      text-decoration: none;
-      margin: 15px 0;
-      opacity: 0;
-      transform: translateY(15px);
-      transition: all 0.4s ease;
-    }
-    .menu.visible a {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .menu.visible a:nth-child(1) { transition-delay: 0.1s; }
-    .menu.visible a:nth-child(2) { transition-delay: 0.2s; }
-    .menu.visible a:nth-child(3) { transition-delay: 0.3s; }
-    .menu.visible a:nth-child(4) { transition-delay: 0.4s; }
-
-    /* Responsive */
     @media (max-width: 768px) {
-      .nav-links { display: none; } /* Ocultar menú escritorio */
-      .menu-toggle { display: flex; }
+      .salas { display: flex; flex-direction: column; gap: 20px; padding: 20px; }
       .sala img { height: 200px; }
-      .salas {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
-      }
     }
   </style>
 </head>
@@ -209,7 +194,7 @@
     <div class="bar"></div>
   </div>
 
-  <!-- Navbar -->
+  <!-- Navbar escritorio -->
   <nav class="navbar">
     <a href="index.html"><img src="images/logo.png" alt="Privat Espais Logo"></a>
     <ul class="nav-links">
@@ -229,13 +214,16 @@
     </ul>
   </nav>
 
-  <!-- Menú lateral móvil -->
+  <!-- Menú móvil -->
   <div class="menu" id="menu">
     <a href="index.html">Inici</a>
     <a href="reserves.html">Reserves</a>
-    <a href="sales/privat.html">Sala Privat</a>
-    <a href="sales/can-petit.html">Sala Can Petit</a>
-    <a href="sales/can-roca.html">Sala Can Roca</a>
+    <a class="toggle-sales">Sales ▼</a>
+    <div class="mobile-dropdown" id="mobileSales">
+      <a href="sales/privat.html">Privat</a>
+      <a href="sales/can-petit.html">Can Petit</a>
+      <a href="sales/can-roca.html">Can Roca</a>
+    </div>
     <a href="preus.html">Preus i Horaris</a>
     <a href="pressupost.html">Pressupost</a>
     <a href="contacte.html">Contacte</a>
@@ -270,10 +258,17 @@
   <script>
     const menuToggle = document.getElementById('menuToggle');
     const menu = document.getElementById('menu');
+    const mobileSales = document.getElementById('mobileSales');
+    const toggleSales = document.querySelector('.toggle-sales');
 
     menuToggle.addEventListener('click', () => {
       menuToggle.classList.toggle('open');
       menu.classList.toggle('visible');
+    });
+
+    toggleSales.addEventListener('click', () => {
+      mobileSales.style.display =
+        mobileSales.style.display === 'flex' ? 'none' : 'flex';
     });
   </script>
 
