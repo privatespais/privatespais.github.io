@@ -6,6 +6,7 @@
   <title>Privat Espais</title>
   <!-- Fuente moderna -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -115,71 +116,101 @@
       grid-column: 1 / 2;
     }
 
-    /* Menú móvil */
-    .hamburger {
-      display: none;
-      font-size: 2rem;
+    /* Botón hamburguesa */
+    .menu-toggle {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      width: 30px;
+      height: 25px;
       cursor: pointer;
-      color: #333;
-      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1001;
     }
-    .hamburger.open {
-      transform: rotate(90deg);
+    .menu-toggle .bar {
+      width: 100%;
+      height: 4px;
+      background: black;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .menu-toggle.open .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.open .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
     }
 
-    .mobile-menu {
-      display: none;
+    /* Menú lateral */
+    .menu {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      z-index: 200;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.3s ease;
-    }
-    .mobile-menu a {
-      color: white;
-      font-size: 1.5rem;
-      margin: 15px 0;
-      text-decoration: none;
-    }
-
-    /* Desplegable Sales en móvil */
-    .mobile-sales {
+      width: 70%;
+      max-width: 280px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
       display: none;
       flex-direction: column;
-      margin-top: 10px;
+      padding: 80px 20px;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateX(-100%);
+      transition: all 0.3s ease;
     }
-    .mobile-sales a {
-      font-size: 1.3rem;
-      margin: 8px 0;
-      padding-left: 10px;
+    .menu.visible {
+      display: flex;
+      opacity: 1;
+      transform: translateX(0);
     }
+    .menu a {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      margin: 15px 0;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all 0.4s ease;
+    }
+    .menu.visible a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .menu.visible a:nth-child(1) { transition-delay: 0.1s; }
+    .menu.visible a:nth-child(2) { transition-delay: 0.2s; }
+    .menu.visible a:nth-child(3) { transition-delay: 0.3s; }
+    .menu.visible a:nth-child(4) { transition-delay: 0.4s; }
 
     /* Responsive */
     @media (max-width: 768px) {
       .nav-links { display: none; } /* Ocultar menú escritorio */
-      .hamburger { display: block; }
-
+      .menu-toggle { display: flex; }
+      .sala img { height: 200px; }
       .salas {
         display: flex;
         flex-direction: column;
         gap: 20px;
         padding: 20px;
       }
-      .sala img { height: 200px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Botón hamburguesa -->
+  <div class="menu-toggle" id="menuToggle">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
   <!-- Navbar -->
   <nav class="navbar">
-    <span class="hamburger" id="hamburger" onclick="toggleMenu()">☰</span>
     <a href="index.html"><img src="images/logo.png" alt="Privat Espais Logo"></a>
     <ul class="nav-links">
       <li><a href="index.html">Inici</a></li>
@@ -198,16 +229,13 @@
     </ul>
   </nav>
 
-  <!-- Menú móvil -->
-  <div class="mobile-menu" id="mobileMenu">
+  <!-- Menú lateral móvil -->
+  <div class="menu" id="menu">
     <a href="index.html">Inici</a>
     <a href="reserves.html">Reserves</a>
-    <a href="#" onclick="toggleSales(event)">Sales ▼</a>
-    <div class="mobile-sales" id="mobileSales">
-      <a href="sales/privat.html">Privat</a>
-      <a href="sales/can-petit.html">Can Petit</a>
-      <a href="sales/can-roca.html">Can Roca</a>
-    </div>
+    <a href="sales/privat.html">Sala Privat</a>
+    <a href="sales/can-petit.html">Sala Can Petit</a>
+    <a href="sales/can-roca.html">Sala Can Roca</a>
     <a href="preus.html">Preus i Horaris</a>
     <a href="pressupost.html">Pressupost</a>
     <a href="contacte.html">Contacte</a>
@@ -240,24 +268,13 @@
 
   <!-- Scripts -->
   <script>
-    const mobileMenu = document.getElementById('mobileMenu');
-    const hamburger = document.getElementById('hamburger');
-    const mobileSales = document.getElementById('mobileSales');
+    const menuToggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('menu');
 
-    function toggleMenu() {
-      if (mobileMenu.style.display === 'flex') {
-        mobileMenu.style.display = 'none';
-        hamburger.classList.remove('open');
-      } else {
-        mobileMenu.style.display = 'flex';
-        hamburger.classList.add('open');
-      }
-    }
-
-    function toggleSales(event) {
-      event.preventDefault();
-      mobileSales.style.display = mobileSales.style.display === 'flex' ? 'none' : 'flex';
-    }
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      menu.classList.toggle('visible');
+    });
   </script>
 
 </body>
