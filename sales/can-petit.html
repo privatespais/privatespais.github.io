@@ -3,303 +3,196 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sala Can Petit - Privat Espais</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Sala Can Petit</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #fafafa;
-      color: #333;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
     }
 
-    /* NAVBAR */
-    .navbar {
+    header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
       background: white;
-      border-bottom: 1px solid #ddd;
-      padding: 15px 40px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      border-bottom: 2px solid #eee;
     }
-    .navbar img {
-      height: 70px;
+
+    header img {
+      height: 50px;
     }
-    .nav-links {
+
+    nav ul {
       list-style: none;
-      display: flex;
-      gap: 25px;
       margin: 0;
       padding: 0;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #555;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-    .nav-links a:hover {
-      color: #ff9800;
+      display: flex;
+      gap: 20px;
     }
 
-    /* DROPDOWN escritorio */
-    .nav-links li {
+    nav ul li {
       position: relative;
     }
-    .dropdown-content {
+
+    nav ul li a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    /* Submenú */
+    nav ul li ul {
       display: none;
       position: absolute;
-      background: #f7f7f7;
-      min-width: 160px;
       top: 100%;
       left: 0;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      z-index: 1;
+      background: white;
+      list-style: none;
+      padding: 10px 0;
+      margin: 0;
+      border: 1px solid #ccc;
     }
-    .dropdown-content a {
-      display: block;
-      padding: 10px;
-      color: #555;
-      text-decoration: none;
-    }
-    .dropdown-content a:hover {
-      background: #eee;
-    }
-    .nav-links li:hover .dropdown-content {
+
+    nav ul li:hover ul {
       display: block;
     }
 
-    /* HAMBURGUESA (móvil) */
+    /* Móvil */
     .menu-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 30px;
-      height: 25px;
-      cursor: pointer;
       display: none;
       flex-direction: column;
-      justify-content: space-between;
-      z-index: 2001;
+      cursor: pointer;
     }
-    .menu-toggle .bar {
-      width: 100%;
-      height: 4px;
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
       background: black;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .menu-toggle.open .bar:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-      background: #ff9800;
-    }
-    .menu-toggle.open .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-toggle.open .bar:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-      background: #ff9800;
+      margin: 4px 0;
     }
 
-    /* MENÚ NEGRO FULLSCREEN MÓVIL */
-    .menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.6s ease;
-      z-index: 2000;
-    }
-    .menu.show {
-      opacity: 1;
-      visibility: visible;
-    }
-    .menu ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      text-align: center;
-    }
-    .menu ul li {
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: slideIn 0.5s forwards;
-    }
-    .menu.show ul li {
-      animation-delay: calc(var(--i) * 0.2s);
-    }
-    .menu ul li a {
-      display: block;
-      text-decoration: none;
-      color: white;
-      font-size: 24px;
-      font-weight: 600;
-      padding: 15px 0;
-      transition: color 0.3s;
-    }
-    .menu ul li a:hover {
-      color: #ff9800;
-    }
-
-    @keyframes slideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .menu .dropdown-content {
-      position: static;
-      background: none;
-      border: none;
-      display: none;
-      padding: 0;
-    }
-    .menu .dropdown-content a {
-      color: #ddd;
-      font-size: 20px;
-      padding: 10px 0;
-    }
-
-    /* LAYOUT SALA */
-    .sala-detall {
-      display: flex;
-      gap: 30px;
-      padding: 40px;
-      align-items: flex-start;
-    }
-    .sala-detall img {
-      width: 50%;
-      border-radius: 12px;
-      object-fit: cover;
-    }
-    .sala-info {
-      flex: 1;
-      background: #f0f0f0;
-      padding: 20px;
-      border-radius: 12px;
-    }
-    .sala-info h2 {
-      margin-top: 0;
-      color: #ff9800;
-    }
-
-    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .navbar {
-        justify-content: center;
-      }
-      .navbar img {
-        margin: 0 auto;
-      }
-      .nav-links {
+      nav ul {
         display: none;
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        border-top: 2px solid #eee;
       }
+
+      nav ul.active {
+        display: flex;
+      }
+
       .menu-toggle {
         display: flex;
       }
-      .sala-detall {
-        flex-direction: column;
-        padding: 20px;
+
+      header {
+        justify-content: center;
       }
-      .sala-detall img {
-        width: 100%;
+
+      header img {
+        margin: 0 auto;
+      }
+    }
+
+    /* Contenido Sala */
+    .container {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .container img {
+      max-width: 100%;
+      border-radius: 15px;
+    }
+
+    .info {
+      background: #eee;
+      border-radius: 15px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <img src="images/logo.png" alt="Logo">
-    <ul class="nav-links">
-      <li><a href="index.html">Inici</a></li>
-      <li><a href="reserves.html">Reserves</a></li>
-      <li>
-        <a href="#">Sales ▼</a>
-        <div class="dropdown-content">
-          <a href="sales/privat.html">Privat</a>
-          <a href="sales/can-petit.html">Can Petit</a>
-          <a href="sales/can-roca.html">Can Roca</a>
-        </div>
-      </li>
-      <li><a href="preus.html">Preus i Horaris</a></li>
-      <li><a href="pressupost.html">Pressupost</a></li>
-      <li><a href="contacte.html">Contacte</a></li>
-    </ul>
-  </nav>
-
-  <!-- HAMBURGUESA -->
-  <div class="menu-toggle" id="menuToggle">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-  </div>
-
-  <!-- MENÚ MÓVIL -->
-  <div class="menu" id="menu">
-    <ul>
-      <li style="--i:0"><a href="index.html">Inici</a></li>
-      <li style="--i:1"><a href="reserves.html">Reserves</a></li>
-      <li style="--i:2">
-        <a href="#" id="mobileSales">Sales ▼</a>
-        <div class="dropdown-content" id="mobileDropdown">
-          <a href="sales/privat.html">Privat</a>
-          <a href="sales/can-petit.html">Can Petit</a>
-          <a href="sales/can-roca.html">Can Roca</a>
-        </div>
-      </li>
-      <li style="--i:3"><a href="preus.html">Preus i Horaris</a></li>
-      <li style="--i:4"><a href="pressupost.html">Pressupost</a></li>
-      <li style="--i:5"><a href="contacte.html">Contacte</a></li>
-    </ul>
-  </div>
-
-  <!-- CONTINGUT SALA -->
-  <section class="sala-detall">
-    <img src="images/can-petit.jpg" alt="Sala Can Petit">
-    <div class="sala-info">
-      <h2>👨‍👩‍👧‍👦 Sala Can Petit</h2>
-      <p>📏 190m² · 👥 Aforament: 80 persones<br>
-      🚗 Aparcament fàcil i gratuït<br>
-      🍽️ Office amb barra, neveres, microones, congelador i cafetera Dolce Gusto ☕ (càpsules no incloses)<br>
-      🪑 4 taules grans + 30 cadires adults · 4 taules petites + 20 cadires + 2 trones<br>
-      🎶 Música: USB, CD, MP3, connexió mòbil/tableta/portàtil<br>
-      📺 Zona relax: sofà + TV 51” + DVD<br>
-      🧒 Zona infantil amb parc de boles (30 nens/es), joguines i Xbox Kinect 🎮<br>
-      ⚽ Futbolí + 🎯 dards (gratuïts)<br>
-      ❄️ Aire condicionat / calefacció · Terra de gres<br>
-      🚻 Banys: 3 dones · 3 homes · 1 adaptat ♿ + canviador nadons + farmaciola<br><br>
-      📍 C/ Camí Font de les Canyes, 48A. Pol. Ind. Can Petit, Terrassa - BARCELONA</p>
+  <header>
+    <a href="index.html"><img src="images/logo.png" alt="Logo Privat"></a>
+    <div class="menu-toggle" id="menu-toggle">
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-  </section>
+    <nav>
+      <ul id="menu">
+        <li><a href="index.html">Inici</a></li>
+        <li>
+          <a href="#">Sales</a>
+          <ul>
+            <li><a href="can-petit.html">Can Petit</a></li>
+            <li><a href="altra-sala.html">Altra Sala</a></li>
+          </ul>
+        </li>
+        <li><a href="contacte.html">Contacte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="image">
+        <img src="images/can-petit.jpg" alt="Sala Can Petit">
+        <h2>Sala Can Petit</h2>
+      </div>
+      <div class="info">
+        <h3>✨ Resum Sala Can Petit</h3>
+        <p>🏠 290m2 | 👥 fins a 120 persones<br>
+        🚗 Aparcament gratuït i fàcil<br>
+        🍹 Barra amb neveres, congelador, microones i cafetera Dolce Gusto ☕ (càpsules no incloses)<br>
+        🪑 6 taules grans + 50 cadires adults | 6 taules petites + 30 cadires + 2 trones per nens<br>
+        🎶 Equip de música (USB, CD, MP3, connexió mòbil/PC/tablet)<br>
+        📺 Zona relax: sofà + TV 51” HDMI/USB + DVD<br>
+        👶 Zona infantil: parc de boles 🎉, joguines i consola Xbox Kinect<br>
+        🎯 Futbolí + dards gratuïts<br>
+        💃 Sala de ball amb llums<br>
+        🚻 Banys (3 dones, 3 homes, 1 adaptat), canviador nadons, farmaciola</p>
+        <p>📍 C/ Camí Font de les Canyes, 48A. Pol. Industrial Can Petit (Terrassa - BARCELONA)</p>
+      </div>
+    </div>
+  </main>
 
   <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const menu = document.getElementById("menu");
-    const mobileSales = document.getElementById("mobileSales");
-    const mobileDropdown = document.getElementById("mobileDropdown");
+    // Menú hamburguesa
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
 
-    menuToggle.addEventListener("click", () => {
-      menuToggle.classList.toggle("open");
-      menu.classList.toggle("show");
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
     });
 
-    mobileSales.addEventListener("click", (e) => {
-      e.preventDefault();
-      mobileDropdown.style.display =
-        mobileDropdown.style.display === "block" ? "none" : "block";
+    // Submenú en mòbil
+    document.querySelectorAll('nav ul li a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (link.nextElementSibling && link.nextElementSibling.tagName === 'UL') {
+          e.preventDefault();
+          link.nextElementSibling.classList.toggle('active');
+        }
+      });
     });
   </script>
 </body>
