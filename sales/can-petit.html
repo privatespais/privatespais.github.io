@@ -44,8 +44,6 @@
     .nav-links a:hover {
       color: #ff9800;
     }
-
-    /* DROPDOWN escritorio */
     .nav-links li {
       position: relative;
     }
@@ -209,12 +207,16 @@
       font-weight: 600;
     }
 
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       .navbar {
         justify-content: center;
       }
       .navbar img {
         margin: 0 auto;
+      }
+      .nav-links {
+        display: none;
       }
       .menu-toggle {
         display: flex;
@@ -236,21 +238,21 @@
 <body>
   <!-- NAVBAR -->
   <nav class="navbar">
-    <img src="images/logo.png" alt="Logo">
+    <img src="/images/logo.png" alt="Logo">
     <ul class="nav-links">
-      <li><a href="index.html">Inici</a></li>
-      <li><a href="reserves.html">Reserves</a></li>
+      <li><a href="/index.html">Inici</a></li>
+      <li><a href="/reserves.html">Reserves</a></li>
       <li>
         <a href="#">Sales ▼</a>
         <div class="dropdown-content">
-          <a href="sales/privat.html">Privat</a>
-          <a href="sales/can-petit.html">Can Petit</a>
-          <a href="sales/can-roca.html">Can Roca</a>
+          <a href="/sales/privat.html">Privat</a>
+          <a href="/sales/can-petit.html">Can Petit</a>
+          <a href="/sales/can-roca.html">Can Roca</a>
         </div>
       </li>
-      <li><a href="preus.html">Preus i Horaris</a></li>
-      <li><a href="pressupost.html">Pressupost</a></li>
-      <li><a href="contacte.html">Contacte</a></li>
+      <li><a href="/preus.html">Preus i Horaris</a></li>
+      <li><a href="/pressupost.html">Pressupost</a></li>
+      <li><a href="/contacte.html">Contacte</a></li>
     </ul>
   </nav>
 
@@ -264,31 +266,30 @@
   <!-- MENÚ MÓVIL -->
   <div class="menu" id="menu">
     <ul>
-      <li style="--i:0"><a href="index.html">Inici</a></li>
-      <li style="--i:1"><a href="reserves.html">Reserves</a></li>
+      <li style="--i:0"><a href="/index.html">Inici</a></li>
+      <li style="--i:1"><a href="/reserves.html">Reserves</a></li>
       <li style="--i:2">
-        <a href="#">Sales ▼</a>
-        <div class="dropdown-content">
-          <a href="sales/privat.html">Privat</a>
-          <a href="sales/can-petit.html">Can Petit</a>
-          <a href="sales/can-roca.html">Can Roca</a>
+        <a href="#" id="mobileSalesToggle">Sales ▼</a>
+        <div class="dropdown-content" id="mobileSalesDropdown">
+          <a href="/sales/privat.html">Privat</a>
+          <a href="/sales/can-petit.html">Can Petit</a>
+          <a href="/sales/can-roca.html">Can Roca</a>
         </div>
       </li>
-      <li style="--i:3"><a href="preus.html">Preus i Horaris</a></li>
-      <li style="--i:4"><a href="pressupost.html">Pressupost</a></li>
-      <li style="--i:5"><a href="contacte.html">Contacte</a></li>
+      <li style="--i:3"><a href="/preus.html">Preus i Horaris</a></li>
+      <li style="--i:4"><a href="/pressupost.html">Pressupost</a></li>
+      <li style="--i:5"><a href="/contacte.html">Contacte</a></li>
     </ul>
   </div>
 
-  <!-- SALA CAN PETIT -->
+  <!-- SECCIÓN SALA CAN PETIT -->
   <section class="sala-container">
     <div class="sala-img">
-      <img src="images/can-petit.jpg" alt="Sala Can Petit">
+      <img src="/images/can-petit.jpg" alt="Sala Can Petit">
       <h2>👨‍👩‍👧‍👦 Sala Can Petit</h2>
     </div>
     <div class="sala-info">
-      <p>🏢 <span>Espai:</span> 290 m²</p>
+      <p>📏 <span>Espai:</span> 290m²</p>
       <p>👥 <span>Capacitat:</span> 120 persones</p>
-      <p>🅿️ <span>Parking:</span> Zona gratuïta i fàcil</p>
-      <p>🍹 <span>Bar:</span> Neveres, congelador, microones, cafetera Dolce Gusto</p>
-      <p>🪑 <span>Mobles:</span> 6 taules 1’80m + 50 cadires adults, 6 ta
+      <p>🚗 <span>Parking:</span> Zona gratuïta i fàcil d'accés</p>
+      <p>🍹 <span>Bar:</span> Barra professional, neveres, congelador, microones
