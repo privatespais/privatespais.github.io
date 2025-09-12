@@ -211,9 +211,6 @@
       font-size: 20px;
       padding: 10px 0;
     }
-    .menu ul li:hover .dropdown-content {
-      display: block;
-    }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -236,6 +233,11 @@
       .menu-toggle {
         display: flex;
       }
+    }
+
+    /* Mostrar u ocultar el dropdown de Salas en móvil */
+    .menu .dropdown-content.show {
+      display: block;
     }
   </style>
 </head>
@@ -286,7 +288,7 @@
     </ul>
   </div>
 
-  <!-- SECCIÓN SALAS (ESCRITORIO Y MÓVIL) -->
+  <!-- SECCIÓN SALAS -->
   <section class="salas">
     <div class="sala">
       <a href="sales/privat.html"><img src="images/privat.jpg" alt="Sala Privat"></a>
@@ -315,29 +317,20 @@
     const menuToggle = document.getElementById("menuToggle");
     const menu = document.getElementById("menu");
 
+    // Abrir/cerrar menú negro móvil
     menuToggle.addEventListener("click", () => {
-      menuToggle.classList.toggle("open");
-      menu.classList.toggle("show");
+      menuToggle.classList.toggle("open"); // anima barras a X
+      menu.classList.toggle("show"); // muestra/oculta gradualmente
     });
 
-    <script>
-  const menuToggle = document.getElementById("menuToggle");
-  const menu = document.getElementById("menu");
+    // Toggle dropdown Salas en móvil sin navegar
+    const mobileSales = document.querySelector('.menu ul li:nth-child(3) > a');
+    const mobileSalesDropdown = document.querySelector('.menu ul li:nth-child(3) .dropdown-content');
 
-  // Abrir/cerrar menú negro móvil
-  menuToggle.addEventListener("click", () => {
-    menuToggle.classList.toggle("open");
-    menu.classList.toggle("show");
-  });
-
-  // Toggle dropdown Salas en móvil sin navegar
-  const mobileSales = document.querySelector('.menu ul li:nth-child(3) > a');
-  const mobileSalesDropdown = document.querySelector('.menu ul li:nth-child(3) .dropdown-content');
-
-  mobileSales.addEventListener("click", (event) => {
-    event.preventDefault(); // evita navegación
-    mobileSalesDropdown.classList.toggle("show"); // muestra/oculta las salas
-   });
+    mobileSales.addEventListener("click", (event) => {
+      event.preventDefault(); // evita navegación
+      mobileSalesDropdown.classList.toggle("show"); // despliega/oculta salas
+    });
   </script>
 </body>
 </html>
