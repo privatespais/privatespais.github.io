@@ -13,11 +13,11 @@
       color: #333;
     }
 
-    /* NAVBAR ESCRITORIO */
+    /* Navbar */
     .navbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       background: white;
       border-bottom: 1px solid #ddd;
       padding: 15px 40px;
@@ -28,12 +28,17 @@
     .navbar img {
       height: 70px;
     }
+
+    /* Menú escritorio */
     .nav-links {
       list-style: none;
       display: flex;
       gap: 25px;
       margin: 0;
       padding: 0;
+    }
+    .nav-links li {
+      position: relative;
     }
     .nav-links a {
       text-decoration: none;
@@ -45,20 +50,16 @@
       color: #ff9800;
     }
 
-    /* DROPDOWN escritorio */
-    .nav-links li {
-      position: relative;
-    }
     .dropdown-content {
       display: none;
       position: absolute;
-      background: #f7f7f7;
+      background-color: #f7f7f7;
       min-width: 160px;
       top: 100%;
       left: 0;
+      z-index: 1;
       border: 1px solid #ddd;
       border-radius: 6px;
-      z-index: 1;
     }
     .dropdown-content a {
       display: block;
@@ -73,7 +74,7 @@
       display: block;
     }
 
-    /* SECCIÓN SALAS */
+    /* Sección salas */
     .salas {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -113,57 +114,60 @@
       grid-column: 1 / 2;
     }
 
-    /* HAMBURGUESA (móvil) */
+    /* Botón hamburguesa */
     .menu-toggle {
       position: fixed;
-      top: 20px;
-      left: 20px;
+      top: 15px;
+      left: 15px;
       width: 30px;
       height: 25px;
       cursor: pointer;
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      z-index: 2001;
+      z-index: 1001;
     }
     .menu-toggle .bar {
       width: 100%;
       height: 4px;
-      background: black; /* visible en móvil */
+      background: #000;
       border-radius: 2px;
       transition: all 0.3s ease;
     }
     .menu-toggle.open .bar:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
-      background: #ff9800;
+      background: white;
     }
     .menu-toggle.open .bar:nth-child(2) {
       opacity: 0;
     }
     .menu-toggle.open .bar:nth-child(3) {
       transform: rotate(-45deg) translate(6px, -6px);
-      background: #ff9800;
+      background: white;
     }
 
-    /* MENÚ NEGRO FULLSCREEN MÓVIL */
+    /* Menú móvil */
     .menu {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0,0,0,0.9);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      z-index: 1000;
       opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.6s ease;
-      z-index: 2000;
+      transform: translateY(-20px);
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .menu.show {
       opacity: 1;
-      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
     }
     .menu ul {
       list-style: none;
@@ -172,77 +176,72 @@
       text-align: center;
     }
     .menu ul li {
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: slideIn 0.5s forwards;
+      margin: 20px 0;
     }
-    .menu.show ul li {
-      animation-delay: calc(var(--i) * 0.2s);
-    }
-    .menu ul li a {
-      display: block;
-      text-decoration: none;
+    .menu ul li a,
+    .menu ul li span {
       color: white;
       font-size: 24px;
       font-weight: 600;
-      padding: 15px 0;
-      transition: color 0.3s;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(-20px);
+      display: inline-block;
+      transition: all 0.4s ease;
+      cursor: pointer;
     }
-    .menu ul li a:hover {
-      color: #ff9800;
+    .menu.show ul li a,
+    .menu.show ul li span {
+      opacity: 1;
+      transform: translateY(0);
     }
+    .menu.show ul li:nth-child(1) a,
+    .menu.show ul li:nth-child(1) span { transition-delay: 0.1s; }
+    .menu.show ul li:nth-child(2) a,
+    .menu.show ul li:nth-child(2) span { transition-delay: 0.2s; }
+    .menu.show ul li:nth-child(3) a,
+    .menu.show ul li:nth-child(3) span { transition-delay: 0.3s; }
+    .menu.show ul li:nth-child(4) a { transition-delay: 0.4s; }
+    .menu.show ul li:nth-child(5) a { transition-delay: 0.5s; }
+    .menu.show ul li:nth-child(6) a { transition-delay: 0.6s; }
 
-    @keyframes slideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
+    /* Dropdown en móvil */
     .menu .dropdown-content {
-      position: static;
-      background: none;
-      border: none;
       display: none;
-      padding: 0;
+      flex-direction: column;
+      margin-top: 10px;
+      gap: 10px;
+    }
+    .menu .dropdown-content.show {
+      display: flex;
     }
     .menu .dropdown-content a {
-      color: #ddd;
       font-size: 20px;
-      padding: 10px 0;
-    }
-    .menu ul li:hover .dropdown-content {
-      display: block;
+      color: #ccc;
     }
 
-    /* RESPONSIVE */
+    /* Responsive */
     @media (max-width: 768px) {
-      .navbar {
-        justify-content: center;
-      }
-      .navbar img {
-        margin: 0 auto; /* logo centrado en móvil */
-      }
-      .nav-links {
-        display: none;
-      }
-      .salas {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
-      }
-      .sala img { height: 200px; }
-      .menu-toggle {
-        display: flex;
-      }
+      .nav-links { display: none; }
+      .menu-toggle { display: flex; }
+      .navbar { justify-content: center; }
+      .navbar img { margin: 0 auto; }
+    }
+    @media (min-width: 769px) {
+      .navbar img { margin-right: auto; }
     }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
+
+  <!-- Navbar -->
   <nav class="navbar">
-    <img src="images/logo.png" alt="Logo">
+    <div class="menu-toggle" id="menuToggle">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <a href="index.html"><img src="images/logo.png" alt="Privat Espais Logo"></a>
     <ul class="nav-links">
       <li><a href="index.html">Inici</a></li>
       <li><a href="reserves.html">Reserves</a></li>
@@ -260,33 +259,26 @@
     </ul>
   </nav>
 
-  <!-- HAMBURGUESA -->
-  <div class="menu-toggle" id="menuToggle">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-  </div>
-
-  <!-- MENÚ MÓVIL -->
+  <!-- Menú móvil -->
   <div class="menu" id="menu">
     <ul>
-      <li style="--i:0"><a href="index.html">Inici</a></li>
-      <li style="--i:1"><a href="reserves.html">Reserves</a></li>
-      <li style="--i:2">
-        <a href="#">Sales ▼</a>
+      <li><a href="index.html">Inici</a></li>
+      <li><a href="reserves.html">Reserves</a></li>
+      <li class="dropdown-mobile">
+        <span class="dropdown-toggle">Sales ▼</span>
         <div class="dropdown-content">
           <a href="sales/privat.html">Privat</a>
           <a href="sales/can-petit.html">Can Petit</a>
           <a href="sales/can-roca.html">Can Roca</a>
         </div>
       </li>
-      <li style="--i:3"><a href="preus.html">Preus i Horaris</a></li>
-      <li style="--i:4"><a href="pressupost.html">Pressupost</a></li>
-      <li style="--i:5"><a href="contacte.html">Contacte</a></li>
+      <li><a href="preus.html">Preus i Horaris</a></li>
+      <li><a href="pressupost.html">Pressupost</a></li>
+      <li><a href="contacte.html">Contacte</a></li>
     </ul>
   </div>
 
-  <!-- SECCIÓN SALAS (ESCRITORIO Y MÓVIL) -->
+  <!-- Sección Salas -->
   <section class="salas">
     <div class="sala">
       <a href="sales/privat.html"><img src="images/privat.jpg" alt="Sala Privat"></a>
@@ -311,14 +303,24 @@
     </div>
   </section>
 
+  <!-- Script -->
   <script>
     const menuToggle = document.getElementById("menuToggle");
     const menu = document.getElementById("menu");
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdownContent = document.querySelector(".dropdown-mobile .dropdown-content");
 
+    // Abrir / cerrar menú negro
     menuToggle.addEventListener("click", () => {
       menuToggle.classList.toggle("open");
       menu.classList.toggle("show");
     });
+
+    // Abrir / cerrar dropdown en móvil
+    dropdownToggle.addEventListener("click", () => {
+      dropdownContent.classList.toggle("show");
+    });
   </script>
+
 </body>
 </html>
